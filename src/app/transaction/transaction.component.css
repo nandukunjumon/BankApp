@@ -1,0 +1,12 @@
+th,td{
+    color: aliceblue;
+}
+p{
+    text-align: center;
+    color: azure;
+    text-decoration: underline;
+    font-size: larger;
+}
+#home{
+    text-align: center;
+}

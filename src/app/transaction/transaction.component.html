@@ -1,0 +1,20 @@
+<p>Transaction History</p>
+<table class="table table-striped ">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr>
+        <td style="color:white ;">CREDIT</td>
+        <td style="color:white ;">1000</td>
+      </tr> -->
+      <tr *ngFor="let T of transaction">
+        <td>{{T.Type}}</td>
+        <td>{{T.amount}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <a  id="home" routerLink="/dashboard">Home</a>
