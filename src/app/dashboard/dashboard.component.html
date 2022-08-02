@@ -5,11 +5,14 @@
     <button class="btn btn-warning" (click)="logout()">logout</button>
 
 </nav>
-<h1 style="color: white;">Welcome {{user}}!!!</h1>
+
+<h1 style="color: white;">Welcome {{user}}!!! <button class="btn btn-danger" (click)="deleteParent()">Delete</button></h1>
 <a routerLink="/transaction">Transaction history</a>
+<h4>Login Details :{{lDate |date :'short'}}</h4>
+<app-delete (onCancel)="cancel()" [item]="acno"></app-delete>
 <!-- Deposit Form -->
 
-<div class="container col-md-12 mt-0">
+<div [ngClass]="acno?'style1':''" class="container col-md-12 mt-0">
 
     <div class="d-flex justify-content-center h-100">
 
@@ -67,7 +70,7 @@
 
 <!-- WithDrawl Form -->
 
-<div class="container col-md-12 mt-0">
+<div  [ngClass]="acno?'style1':''" class="container col-md-12 mt-0">
     <div class="d-flex justify-content-center h-100">
         <div class="card">
             <div class="card-header">
