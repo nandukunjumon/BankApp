@@ -74,22 +74,32 @@ else{
 
   //WithDrawl
   withdraw(){
-    var acno = this.withdrawForm.value.acno1
-    var pswd = this.withdrawForm.value.pswd1
+
+    var acno =  this.withdrawForm.value.acno1
+    var pswd =  this.withdrawForm.value.pswd1
     var amount = this.withdrawForm.value.amount1
 
-    const result =this.ds.withdraw(acno,pswd,amount)
-    if(this.withdrawForm.valid){
-
-    if(result){
-      alert(`${amount} Debited Success Fully And New Balance Is ${result} `)
+   
+   // const result =this.ds.deposit(acno,pswd,amount)
+if(this.withdrawForm.valid){
+  this.ds.withdraw(acno,pswd,amount)
+  .subscribe(
+    (result:any)=>{
+     
+   alert(result.message)
+    },
+    result=>{
+      alert(result.error.message)
     }
+  )
+ 
+}
+else{
+  alert('Invalid Form')
+}
+   
 
   }
-  else{
-    alert('Invalid Form')
-  }
-}
 
 
 //logout

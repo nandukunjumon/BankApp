@@ -101,40 +101,24 @@ getOptions(){
 
   //withdraw
   withdraw(acno: any, pswd: any, amt: any) {
-    let userDetails = this.userDetails
-    var amount = parseInt(amt)
-    if (acno in userDetails) {
-      if (pswd == userDetails[acno]['password']) {
-        if (userDetails[acno]['balance'] > amount) {
-          userDetails[acno]['balance'] -= amount
-          userDetails[acno]['transaction'].push({
-            type: 'DEBIT',
-            amount: amount
-          })
-          console.log(userDetails);
-          this.saveDetails();
-          return userDetails[acno]['balance']
-        }
-        else {
-          alert('Insufficient Balance')
-          return false
-        }
-      }
-      else {
-        alert('Incorrect Password')
-        return false
-      }
+    const data = {
+      acno, pswd, amt
+    }
+    //register api - asynchronous
 
-    }
-    else {
-      alert('User Does not Exist')
-      return false
-    }
+    return this.http.post('http://localhost:3000/withdraw', data,this.getOptions())
+
   }
+  
 
   //transaction
   getTransaction(acno: any) {
-    return this.userDetails[acno]['transaction']
-  }
+    const data = {
+      acno
+    }
+    //register api - asynchronous
 
+    return this.http.post('http://localhost:3000/getTransaction', data,this.getOptions())
+
+  }
 }
