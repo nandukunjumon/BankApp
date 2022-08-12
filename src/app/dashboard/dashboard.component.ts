@@ -32,7 +32,8 @@ withdrawForm=this.fb.group({
   acno1:['',[Validators.required,Validators.pattern('[0-9]*')]],
   amount1:['',[Validators.required,Validators.pattern('[0-9]*')]]
 })
-  constructor(private ds:DataService,private fb:FormBuilder,private router:Router) {this.user=this.ds.currentUser
+  constructor(private ds:DataService,private fb:FormBuilder,private router:Router) {
+    this.user=JSON.parse(localStorage.getItem('currentUsername')||'')
   this.lDate=new Date() }
 
   ngOnInit(): void {
@@ -52,9 +53,17 @@ withdrawForm=this.fb.group({
    
     const result =this.ds.deposit(acno,pswd,amount)
 if(this.depositForm.valid){
-  if(result){
-    alert(`${amount} Credited Success Fully And New Balance Is ${result} `)
-  }
+  const result=this.ds.deposit(acno,pswd,amount)
+  .subscribe(
+    (result:any)=>{
+     
+   alert(result.message)
+    },
+    result=>{
+      alert(result.error.message)
+    }
+  )
+ 
 }
 else{
   alert('Invalid Form')
