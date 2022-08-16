@@ -9,7 +9,7 @@
 <h1 style="color: white;">Welcome {{user}}!!! <button class="btn btn-danger" (click)="deleteParent()">Delete</button></h1>
 <a routerLink="/transaction">Transaction history</a>
 <h4>Login Details :{{lDate |date :'short'}}</h4>
-<app-delete (onCancel)="cancel()" [item]="acno"></app-delete>
+<app-delete (onDelete)="onDelete($event)" (onCancel)="cancel()" [item]="acno"></app-delete>
 <!-- Deposit Form -->
 
 <div [ngClass]="acno?'style1':''" class="container col-md-12 mt-0">

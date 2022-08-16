@@ -9,6 +9,7 @@ export class DeleteComponent implements OnInit {
 
   @Input() item:string|undefined
   @Output() onCancel=new EventEmitter
+  @Output() onDelete=new EventEmitter
 
   constructor() { }
 
@@ -16,5 +17,9 @@ export class DeleteComponent implements OnInit {
   }
 cancel(){
   this.onCancel.emit()
+}
+
+delete(){
+  this.onDelete.emit(this.item)
 }
 }

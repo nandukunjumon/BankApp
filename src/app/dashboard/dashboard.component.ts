@@ -33,11 +33,16 @@ withdrawForm=this.fb.group({
   amount1:['',[Validators.required,Validators.pattern('[0-9]*')]]
 })
   constructor(private ds:DataService,private fb:FormBuilder,private router:Router) {
-    this.user=JSON.parse(localStorage.getItem('currentUsername')||'')
+    
+    if(localStorage.getItem('currentUsername')){
+      this.user=JSON.parse(localStorage.getItem('currentUsername')||'')
+
+    }
+    
   this.lDate=new Date() }
 
   ngOnInit(): void {
-    if(!localStorage.getItem('currentAcno')){
+    if(!localStorage.getItem('token')){
       alert('Please login')
       this.router.navigateByUrl('')
     }
@@ -107,6 +112,8 @@ logout(){
   //remove login acno,uname
   localStorage.removeItem('currentAcno')
   localStorage.removeItem('currentUser')
+  localStorage.removeItem('token')
+
   //navig to login
   this.router.navigateByUrl('')
 
@@ -117,5 +124,17 @@ deleteParent(){
 }
 cancel(){
   this.acno=""
+}
+onDelete(event:any){
+this.ds.delete(event)
+.subscribe(
+  (result:any)=>{
+    alert(result.message)
+    this.router.navigateByUrl('')
+  },
+  result=>{
+    alert(result.error.message)
+  }
+  )
 }
 }
